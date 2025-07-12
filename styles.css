@@ -211,18 +211,16 @@ background: none;
 background: none;
 }
 .completed {
-
 text-decoration: line-through;
 
 color:gray;
 
 }
 .task-checkbox {
-}
 margin-right: 10px;
 
 cursor: pointer;
-
+}
 #clear-all-btn:hover {
 background: darkred;
 }

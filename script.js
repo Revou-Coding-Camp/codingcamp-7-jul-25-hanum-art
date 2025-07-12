@@ -16,8 +16,8 @@ addtaskBtn.addEventListener("click",addTask);
 clearAllBtn.addEventListener("click",clearAllTask);
 
 function addTask(){
-    conts taskText = taskInput.value.trim();
-    if(taskText === || selectedData === ""){
+    const taskText = taskInput.value.trim();
+    if(taskText === ""|| selectedData === ""){
         alert("Please enter a task and select a due date.");
         return
 
@@ -105,19 +105,17 @@ alert("Task name and date cannot be empty");
 
 return
 }
-const daysLeft calculateDaysLeft(newDate); const daysLeftText daysLeft ===? "Task Overdue": ${daysLeft) $ (daysLeft ===1? "day" "days") left; let color daysLeft < 3? "red" daysLeft <= 5? "orange": "green";
+const daysLeft = calculateDaysLeft(newDate); 
+const daysLeftText = daysLeft === 0? "Task Overdue":` ${daysLeft} ${daysLeft ===1? "day" : "days"} left`;
+ let color = daysLeft < 3? "red" : daysLeft <= 5? "orange": "green";
 
 const taskTextElement = document.createElement("span");
-
 taskTextElement.textContent = newText;
-
 taskTextElement.classList.add("task-text");
+const daysLeftElement = document.createElement("span");
 
-const daysLeftElement document.createElement("span");
-
-daysLeftElement.textContent daysLeftText;
-
-daysLeft Element.style.color = color;
+daysLeftElement.textContent = daysLeftText;
+daysLeftElement.style.color = color;
 
 daysLeftElement.classList.add("days-left");
 const editBtn = document.createElement("button");
@@ -127,12 +125,8 @@ editBtn.innerHTML = "";
 editBtn.classList.add("edit-btn");
 
 li.replaceChild(taskTextElement, li.querySelector(".edit-input"));
-
-11.replaceChild(daysLeftElement, li.querySelector(".edit-date"));
-
-li.replaceChild(edit new li.querySelector(".save-btn"));
-
-[Music]
+li.replaceChild(daysLeftElement, li.querySelector(".edit-date"));
+li.replaceChild(editBtn, li.querySelector(".save-btn"));
 
 editBtn.addEventListener("click", () => editTask(li, newText, newDate));
 updateTaskinLocalStorage (oldText, newText, newDate);
@@ -145,12 +139,10 @@ function calculateDaysLeft(taskDate) {
 
 const today = new Date();
 const dueDate = new Date(taskDate);
-
-const timeDiff dueDate today;
-
-const daysLeft = Math.ceil(timeDiff / (1000-60 60*24));
-
-return daysLeft < 0?0 daysLeft;
+const timeDiff = dueDate-today;
+const daysLeft = Math.ceil(timeDiff / (1000-60-60*24));
+return daysLeft < 0? 0 : daysLeft;
+}
 function saveTaskToLocalStorage(taskText, isCompleted, taskDate) {
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 tasks.push({ text: taskText, completed: isCompleted, date: taskDate}); 
@@ -177,9 +169,7 @@ function loadTasks() {
 
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
-tasks.sort((a, b) => calculateDaysLeft(a.date) calculateDaysLeft(b.
-
-date));
+tasks.sort((a, b) => calculateDaysLeft(a.date)-calculateDaysLeft(b.date));
 
 taskList.innerHTML = "";
 
@@ -191,6 +181,7 @@ taskList.appendChild(taskItem);
 });
 
 updatePendingTasks();
+}
 function updatePendingTasks() {
 
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];

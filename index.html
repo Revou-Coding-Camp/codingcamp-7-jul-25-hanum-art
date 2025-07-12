@@ -3,9 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>To-Do List</title>
+    <link role="stylesheet"before="styles.css> 
 </head>
 <body>
-    
+<div class="container">
+    <h1>To Do List App</h1>
+    <div class="input-container">
+      <input type="text"id="task-input" placeholder="Enter your task..."> 
+      <div class="date-picker">
+    <span class="calender-icon" id="calender-icon">📅</span>
+        <input type="date" id="task-date"class="hidden">
+      </div>
+      <button id="add-task-btn">+</button> </button>
+    </div>
+    <div id="task-list"></div>
+
+    <div id="footer">
+        <p id="pending-tasks">You have 0 pending tasks</p>
+        <button id="clear-all-btn">Clear All</button>
+    </div>
+</div>
+    <script src="script.js"></script>
 </body>
 </html>
