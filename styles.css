@@ -13,12 +13,12 @@ body{
 
 }
 
-.cotainer{
+.container{
     width: 550px;
     padding: 20px;
     background: #2c3036;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0,2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
 }
 
@@ -29,6 +29,8 @@ h1{
 .input-container{
     display: flex;
     justify-content: center;
+    margin-bottom: 20px;
+    align-items: center;
     gap: 10px;
 }
 input{
@@ -55,7 +57,7 @@ input.edit-date{
 button{
     padding: 10px 14px;
     border: none;
-    background:var(--gradient) ;
+    background:var(--gradient);
     color: #fff;
     font-size: 20px;
     cursor: pointer;
@@ -67,7 +69,7 @@ button:hover{
     background: var(--gradient-hover);
 
 }
-#pendind-task{
+#pending-tasks{
     margin-top: 15px;
     font-size: 16px;
     color: #89Bf97;
@@ -96,7 +98,7 @@ button:hover{
     cursor: pointer;
     line-height: 40px;
 }
-footer{
+#footer{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -121,53 +123,34 @@ padding: 0;
 }
 li {
 display: flex;
-
 justify-content: space-between;
-
 align-items: center;
-
 background: #131827;
-
 padding: 10px;
-
 margin: 5px 0;
-
 border-radius: 5px;
 }
 
 li span {
 flex: 1;
-
 color: #898f97;
-
 margin-left: 10px;
-
 text-align: left;
 }
 task-checkbox{
-
 appearance: none;
-
 width: 16px;
-
 height: 16px;
-
 border: 2px solid #898f97;
-
 border-radius: 50%;
-
 cursor: pointer;
-
 position: relative;
 
 }
 
 .task-checkbox:checked {
 
-background-color:
-
-#28a745;
-
+background-color:#28a745;
 border-color:#28a745;
 }
 .task-checkbox:checked::after {
