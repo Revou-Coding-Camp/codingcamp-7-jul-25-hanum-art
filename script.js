@@ -33,13 +33,13 @@ function addTask(){
 function createTaskElement(taskText, isCompleted, taskDate){
     const li = document.createElement("li");
     const daysLeft = calculateDaysLeft(taskDate);
-     const daysLeftText = daysLeft === 0 ? "Task Overdue" : `${daysLeft} ${daysLeft} === 1? "day": "days"} left`;
+     const daysLeftText = daysLeft === 0 ? "Task Overdue" : `${daysLeft} ${daysLeft === 1? "day": "days"} left`;
 
-     let color = daysLeft < 3? "red" : daysLeft<=5 ? "orangr" :"green" ;
+     let color = daysLeft < 3? "red" : daysLeft<=5 ? "orange" :"green" ;
      li.innerHTML =`
      <input type= "checkbox" class="task-checkbox" ${isCompleted ? "checked" : ""}>
      <span class="task-text ${isCompleted ? "completed" : ""}">${taskText}</span>
-     <span class "daysLeft" style="color: ${color};">${daysLeftText}</span>
+     <span class="daysLeft" style="color: ${color};">${daysLeftText}</span>
      <button class="edit-btn">✏️</button>
      <button class="delete-btn">❌</button>
 `;
@@ -96,8 +96,8 @@ alert("Task name and date cannot be empty");
 return
 }
 const daysLeft = calculateDaysLeft(newDate); 
-const daysLeftText = daysLeft === 0? "Task Overdue":` ${daysLeft} ${daysLeft ===1 ? "day" : "days"} left`;
- let color = daysLeft < 3? "red" : daysLeft <= 5? "orange": "green";
+const daysLeftText = daysLeft === 0? "Task Overdue":` ${daysLeft} ${daysLeft === 1 ? "day" : "days"} left`;
+ let color = daysLeft < 3 ? "red" : daysLeft <= 5 ? "orange": "green";
 
 const taskTextElement = document.createElement("span");
 taskTextElement.textContent = newText;
@@ -111,7 +111,6 @@ daysLeftElement.classList.add("days-left");
 const editBtn = document.createElement("button");
 
 editBtn.innerHTML = "";
-
 editBtn.classList.add("edit-btn");
 
 li.replaceChild(taskTextElement, li.querySelector(".edit-input"));
@@ -130,7 +129,7 @@ function calculateDaysLeft(taskDate) {
 const today = new Date();
 const dueDate = new Date(taskDate);
 const timeDiff = dueDate - today;
-const daysLeft = Math.ceil(timeDiff / (1000 - 60 - 60 *24));
+const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
 return daysLeft < 0 ? 0 : daysLeft;
 }
 function saveTaskToLocalStorage(taskText, isCompleted, taskDate) {
@@ -143,7 +142,7 @@ function updateTaskinLocalStorage(oldText, newText, newDate) {
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 tasks = tasks.map(task =>
 task.text === oldText ? { text: newText, completed: task.completed, date: newDate}: task);
-localStorage.setItem("task", JSON.stringify(tasks))
+localStorage.setItem("tasks", JSON.stringify(tasks))
 }
 
 function removeTaskFromLocalStorage(taskText) {
@@ -168,4 +167,9 @@ let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 let pendingCount = tasks.filter(task => !task.completed).length;
  pendingTaskCount.textContent = `You have ${pendingCount} pending tasks.`;
 clearAllBtn.style.display = tasks.length > 0 ? "inline-block" : "none";
+}
+function clearAllTasks() {
+  localStorage.removeItem("tasks");
+  taskList.innerHTML = "";
+  updatePendingTasks();
 }
